@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54422BD92BE4FA7500CE69DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BD82BE4FA7500CE69DA /* SearchViewController.swift */; };
+		54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */; };
 		5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB4F2BE489E600F990A6 /* AppDelegate.swift */; };
 		5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB512BE489E600F990A6 /* SceneDelegate.swift */; };
 		5499EB542BE489E600F990A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB532BE489E600F990A6 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54422BD82BE4FA7500CE69DA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBooksViewController.swift; sourceTree = "<group>"; };
 		5499EB4C2BE489E600F990A6 /* StayJun_Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayJun_Book.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5499EB4F2BE489E600F990A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5499EB512BE489E600F990A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				5499EB4F2BE489E600F990A6 /* AppDelegate.swift */,
 				5499EB512BE489E600F990A6 /* SceneDelegate.swift */,
 				5499EB532BE489E600F990A6 /* ViewController.swift */,
+				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				5499EB5B2BE489E800F990A6 /* Assets.xcassets */,
 				5499EB5D2BE489E800F990A6 /* LaunchScreen.storyboard */,
 				5499EB602BE489E800F990A6 /* Info.plist */,
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54422BD92BE4FA7500CE69DA /* SearchViewController.swift in Sources */,
 				5499EB542BE489E600F990A6 /* ViewController.swift in Sources */,
 				5499EB5A2BE489E600F990A6 /* StayJun_Book.xcdatamodeld in Sources */,
+				54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */,
 				5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */,
 				5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */,
 			);
