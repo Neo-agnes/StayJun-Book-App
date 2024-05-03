@@ -12,6 +12,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let searchViewController = SearchViewController()
+        let savedBooksViewController = SavedBooksViewController()
+
+        // 책 검색 화면 탭 바 아이템 설정
+        let searchTabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "book"), selectedImage: nil)
+        searchViewController.tabBarItem = searchTabBarItem
+
+        // 담은 책 리스트 화면 탭 바 아이템 설정
+        let savedBooksTabBarItem = UITabBarItem(title: "Saved Books", image: UIImage(systemName: "book"), selectedImage: nil)
+        savedBooksViewController.tabBarItem = savedBooksTabBarItem
+        
         // UIView 생성
         let myView = UIView()
         myView.backgroundColor = .blue

@@ -20,7 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 각 탭에 해당하는 뷰 컨트롤러 생성
         let searchViewController = SearchViewController() // 책 검색 화면
+        // 책 검색 아이콘 설정
+        let searchTabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), selectedImage: nil)
+        
+        searchViewController.tabBarItem = searchTabBarItem
+        
         let savedBooksViewController = SavedBooksViewController() // 담은 책 리스트 화면
+        
+        // 책 리스트 아이콘 설정
+        let savedBooksTabBarItem = UITabBarItem(title: "Saved Books", image: UIImage(systemName: "book"), selectedImage: nil)
+        
+        savedBooksViewController.tabBarItem = savedBooksTabBarItem
         
         // 뷰 컨트롤러들을 탭 바 컨트롤러에 추가
         tabBarController.viewControllers = [searchViewController, savedBooksViewController]

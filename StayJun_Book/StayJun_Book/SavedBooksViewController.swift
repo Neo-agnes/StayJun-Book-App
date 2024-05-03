@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class SavedBooksViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     // 테이블 뷰
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -18,9 +19,9 @@ class SavedBooksViewController: UIViewController, UITableViewDataSource, UITable
         return tableView
     }()
     
-    // 사용자가 담은 책 리스트 (임시 데이터)
-    let savedBooks = ["Book 1", "Book 2", "Book 3"]
-
+    // CoreData에서 가져온 책 객체의 제목을 저장하는 배열
+    var savedBookTitles: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,17 +34,41 @@ class SavedBooksViewController: UIViewController, UITableViewDataSource, UITable
         
         // 테이블 뷰의 레이아웃 설정
         tableView.frame = view.bounds
+        
+        // CoreData에서 데이터를 가져와서 저장하는 코드
+        fetchBooks()
+    }
+    
+    // CoreData에서 데이터를 가져와서 저장하는 메서드
+    func fetchBooks() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Book")
+        
+        do {
+            let books = try managedContext.fetch(fetchRequest)
+            for book in books {
+                if let title = book.value(forKey: "title") as? String {
+                    savedBookTitles.append(title)
+                }
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
     
     // MARK: - UITableViewDataSource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedBooks.count
+        return savedBookTitles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = savedBooks[indexPath.row]
+        cell.textLabel?.text = savedBookTitles[indexPath.row]
         return cell
     }
     
