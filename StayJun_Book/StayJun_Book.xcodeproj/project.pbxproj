@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		54422BD92BE4FA7500CE69DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BD82BE4FA7500CE69DA /* SearchViewController.swift */; };
 		54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */; };
+		547BF50B2BE9A6EE00795626 /* SearchBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */; };
+		547BF50E2BE9AA4900795626 /* BookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50D2BE9AA4900795626 /* BookAPIManager.swift */; };
+		547BF5102BE9B1A000795626 /* BookCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50F2BE9B1A000795626 /* BookCustomCell.swift */; };
+		547BF5132BEA351600795626 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF5122BEA351600795626 /* BookDetailViewController.swift */; };
 		5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB4F2BE489E600F990A6 /* AppDelegate.swift */; };
 		5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB512BE489E600F990A6 /* SceneDelegate.swift */; };
-		5499EB542BE489E600F990A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB532BE489E600F990A6 /* ViewController.swift */; };
 		5499EB5A2BE489E600F990A6 /* StayJun_Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5499EB582BE489E600F990A6 /* StayJun_Book.xcdatamodeld */; };
 		5499EB5C2BE489E800F990A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5499EB5B2BE489E800F990A6 /* Assets.xcassets */; };
 		5499EB5F2BE489E800F990A6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5499EB5E2BE489E800F990A6 /* Base */; };
@@ -20,10 +23,13 @@
 /* Begin PBXFileReference section */
 		54422BD82BE4FA7500CE69DA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBooksViewController.swift; sourceTree = "<group>"; };
+		547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookModel.swift; sourceTree = "<group>"; };
+		547BF50D2BE9AA4900795626 /* BookAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAPIManager.swift; sourceTree = "<group>"; };
+		547BF50F2BE9B1A000795626 /* BookCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCustomCell.swift; sourceTree = "<group>"; };
+		547BF5122BEA351600795626 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		5499EB4C2BE489E600F990A6 /* StayJun_Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StayJun_Book.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5499EB4F2BE489E600F990A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5499EB512BE489E600F990A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5499EB532BE489E600F990A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5499EB592BE489E600F990A6 /* StayJun_Book.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StayJun_Book.xcdatamodel; sourceTree = "<group>"; };
 		5499EB5B2BE489E800F990A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5499EB5E2BE489E800F990A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,6 +47,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		547BF5082BE9A66800795626 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		547BF50C2BE9AA0300795626 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				547BF50D2BE9AA4900795626 /* BookAPIManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		547BF5112BE9E36F00795626 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
+				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
+				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5499EB432BE489E600F990A6 = {
 			isa = PBXGroup;
 			children = (
@@ -60,11 +93,11 @@
 		5499EB4E2BE489E600F990A6 /* StayJun_Book */ = {
 			isa = PBXGroup;
 			children = (
+				547BF5112BE9E36F00795626 /* View */,
+				547BF50C2BE9AA0300795626 /* Network */,
+				547BF5082BE9A66800795626 /* Model */,
 				5499EB4F2BE489E600F990A6 /* AppDelegate.swift */,
 				5499EB512BE489E600F990A6 /* SceneDelegate.swift */,
-				5499EB532BE489E600F990A6 /* ViewController.swift */,
-				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
-				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				5499EB5B2BE489E800F990A6 /* Assets.xcassets */,
 				5499EB5D2BE489E800F990A6 /* LaunchScreen.storyboard */,
 				5499EB602BE489E800F990A6 /* Info.plist */,
@@ -144,11 +177,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				54422BD92BE4FA7500CE69DA /* SearchViewController.swift in Sources */,
-				5499EB542BE489E600F990A6 /* ViewController.swift in Sources */,
+				547BF5102BE9B1A000795626 /* BookCustomCell.swift in Sources */,
 				5499EB5A2BE489E600F990A6 /* StayJun_Book.xcdatamodeld in Sources */,
 				54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */,
+				547BF50B2BE9A6EE00795626 /* SearchBookModel.swift in Sources */,
+				547BF5132BEA351600795626 /* BookDetailViewController.swift in Sources */,
 				5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */,
 				5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */,
+				547BF50E2BE9AA4900795626 /* BookAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
