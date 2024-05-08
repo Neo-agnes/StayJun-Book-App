@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 class BookCustomCell: UICollectionViewCell {
+    
+    let titleLabel = UILabel()
+    let coverImageView = UIImage()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         // 원형 버튼 생성 및 스타일 설정
@@ -19,6 +23,7 @@ class BookCustomCell: UICollectionViewCell {
         button.layer.cornerRadius = buttonSize / 2 // 원형 버튼으로 만들기 위해 반지름 설정
         button.backgroundColor = .blue // 버튼의 배경색 설정
         addSubview(button)
+        
     }
     
     required init?(coder: NSCoder) {

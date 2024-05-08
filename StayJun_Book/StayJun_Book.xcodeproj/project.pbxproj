@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		54422BD92BE4FA7500CE69DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BD82BE4FA7500CE69DA /* SearchViewController.swift */; };
 		54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */; };
-		547BF50B2BE9A6EE00795626 /* SearchBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */; };
+		547BF50B2BE9A6EE00795626 /* MyCoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50A2BE9A6EE00795626 /* MyCoreDataController.swift */; };
 		547BF50E2BE9AA4900795626 /* BookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50D2BE9AA4900795626 /* BookAPIManager.swift */; };
 		547BF5102BE9B1A000795626 /* BookCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF50F2BE9B1A000795626 /* BookCustomCell.swift */; };
 		547BF5132BEA351600795626 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BF5122BEA351600795626 /* BookDetailViewController.swift */; };
@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		54422BD82BE4FA7500CE69DA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedBooksViewController.swift; sourceTree = "<group>"; };
-		547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookModel.swift; sourceTree = "<group>"; };
+		547BF50A2BE9A6EE00795626 /* MyCoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoreDataController.swift; sourceTree = "<group>"; };
 		547BF50D2BE9AA4900795626 /* BookAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAPIManager.swift; sourceTree = "<group>"; };
 		547BF50F2BE9B1A000795626 /* BookCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCustomCell.swift; sourceTree = "<group>"; };
 		547BF5122BEA351600795626 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		547BF5082BE9A66800795626 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				547BF50A2BE9A6EE00795626 /* SearchBookModel.swift */,
+				547BF50A2BE9A6EE00795626 /* MyCoreDataController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 				547BF5102BE9B1A000795626 /* BookCustomCell.swift in Sources */,
 				5499EB5A2BE489E600F990A6 /* StayJun_Book.xcdatamodeld in Sources */,
 				54422BDB2BE4FA9200CE69DA /* SavedBooksViewController.swift in Sources */,
-				547BF50B2BE9A6EE00795626 /* SearchBookModel.swift in Sources */,
+				547BF50B2BE9A6EE00795626 /* MyCoreDataController.swift in Sources */,
 				547BF5132BEA351600795626 /* BookDetailViewController.swift in Sources */,
 				5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */,
 				5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */,

@@ -15,6 +15,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     let searchTextField = UITextField()
     let searchButton = UIButton()
     let recentBooksLabel = UILabel()
+    let coverImageView = UIImageView()
     let BookCustomCellCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let myCoreDataController = MyCoreDataController()
     let searchResultLabel = UILabel()
@@ -32,7 +33,8 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         setupLayout()
         BookCustomCellCollectionView.delegate = self
         BookCustomCellCollectionView.dataSource = self
-        //myCoreDataController.addNewBook(title: "나의 작은 라임 오렌지 나무", coverImage: "이미지 경로", publicationDate: Date())
+//        myCoreDataController.addNewBook(title: "나의 작은 라임 오렌지 나무", coverImage: "이미지 경로", publicationDate: Date())
+//        searchBooks()
     }
     
     //MARK: - setupUI
@@ -77,6 +79,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         view.addSubview(BookCustomCellCollectionView) // BookCustomCellCollectionView 추가
         view.addSubview(searchResultLabel)
         searchResultViews.forEach { view.addSubview($0) }
+        coverImageView.image = UIImage(named: "imageName")
     }
     
     //MARK: - CollectionView
@@ -89,37 +92,46 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         // 셀을 구성하여 반환합니다.
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCustomCell", for: indexPath) as! BookCustomCell
         // 셀에 책 정보 표시
+        
         let book = searchResults[indexPath.item]
         cell.titleLabel.text = book.title
-        cell.coverImageView.image = UIImage(named: book.coverImage ?? "") // 책 이미지 설정
+        //        cell.coverImageView.image = UIImage(named: book.coverImage ?? "") // 책 이미지 설정
         return cell
     }
     
-    //MARK: - UICollectionViewDelegateFlowLayout 프로토콜 메서드
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth: CGFloat = 100 // 셀의 폭
-        let cellHeight: CGFloat = 100 // 셀의 높이
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20 // 셀 간의 수평 간격
-    }
-    
-    //MARK: - 검색 버튼 액션
     @objc private func searchButtonTapped() {
         // 검색어가 비어있는지 확인
         guard let searchText = searchTextField.text, !searchText.isEmpty else {
             // 검색어가 비어있는 경우에 대한 처리 (예: 사용자에게 알림 표시)
             return
         }
-        
+
         // CoreData에서 검색어에 해당하는 책을 찾아옴
         searchResults = myCoreDataController.searchBooks(with: searchText)
         
+        // 검색 결과가 있는지 확인
+        if searchResults.isEmpty {
+            // 검색 결과가 없는 경우
+            displayNoResultsMessage()
+        } else {
+            // 검색 결과가 있는 경우
+            displayNearestResultMessage()
+        }
+
         // 컬렉션 뷰 업데이트
         BookCustomCellCollectionView.reloadData()
     }
+    
+    private func displayNoResultsMessage() {
+        let alertController = UIAlertController(title: "검색 결과 없음", message: "검색 결과가 없습니다. 다른 검색어로 시도해보세요.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+
+    private func displayNearestResultMessage() {
+        // 여기에 가장 근접한 검색 결과를 찾는 로직 및 메시지 표시 코드를 작성합니다.
+    }
+
     
     //MARK: - setupLayout
     private func setupLayout() {
