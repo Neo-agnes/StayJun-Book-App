@@ -50,11 +50,13 @@ class SavedBooksViewController: UIViewController, UITableViewDataSource, UITable
         
         do {
             let books = try managedContext.fetch(fetchRequest)
+            savedBookTitles.removeAll()  // 배열을 비우고 시작
             for book in books {
                 if let title = book.value(forKey: "title") as? String {
                     savedBookTitles.append(title)
                 }
             }
+            tableView.reloadData()  // 데이터를 로드한 후 테이블 뷰 갱신
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
@@ -76,5 +78,25 @@ class SavedBooksViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 특정 책을 선택했을 때 동작 정의 (추후 구현)
+    }
+}
+
+extension SearchViewController {
+    func saveBook(title: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Book", in: managedContext)!
+        let book = NSManagedObject(entity: entity, insertInto: managedContext)
+        book.setValue(title, forKey: "title")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            showErrorAlert(message: "책을 저장하는 데 실패했습니다: \(error.localizedDescription)")
+        }
     }
 }

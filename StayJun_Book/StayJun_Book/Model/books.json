@@ -1,0 +1,16 @@
+{
+    "books": [
+        {
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "isbn": "9780743273565",
+            "publish_year": 1925
+        },
+        {
+            "title": "Moby Dick",
+            "author": "Herman Melville",
+            "isbn": "9781503280786",
+            "publish_year": 1851
+        }
+    ]
+}
