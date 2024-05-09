@@ -1,0 +1,20 @@
+{
+    "books": [
+        {
+            "title": "테스트 책 1",
+            "author": "Author Name",
+            "isbn": "123456789",
+            "publish_year": 2021,
+            "price": 19.99,
+            "image_url": "http://example.com/image.jpg"
+        },
+        {
+            "title": "테스트 책 2",
+            "author": "Author Name",
+            "isbn": "123456789",
+            "publish_year": 2025,
+            "price": 19.99,
+            "image_url": "http://example.com/image.jpg"
+        }
+    ]
+}
