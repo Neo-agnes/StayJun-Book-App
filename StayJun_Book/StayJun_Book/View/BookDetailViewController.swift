@@ -9,18 +9,62 @@ import UIKit
 import CoreData
 
 class BookDetailViewController: UIViewController {
-    // 책 상세 정보를 표시할 레이블 등 필요한 UI 요소 추가
+    var book: BookModel?
     
-//    var book: Books? // 책 정보를 저장할 프로퍼티
+    let titleLabel = UILabel()
+    let authorLabel = UILabel()
+    let imageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 책 정보를 기반으로 UI 설정
+        view.backgroundColor = .white
+        setupLayout()
+        configureView()
+    }
+    
+    func configureView() {
+        guard let book = book else { return }
+        titleLabel.text = book.title
+        authorLabel.text = "저자: \(book.authors.joined(separator: ", "))"
         
-        // 모달 방식으로 화면을 표시
-        self.modalPresentationStyle = .fullScreen
+        if let imageUrl = URL(string: book.thumbnail) {
+            URLSession.shared.dataTask(with: imageUrl) { [weak self] data, response, error in
+                guard let data = data, error == nil else { return }
+                DispatchQueue.main.async {
+                    self?.imageView.image = UIImage(data: data)
+                }
+            }.resume()
+        }
     }
-
+    
+    private func setupLayout() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(titleLabel)
+        view.addSubview(authorLabel)
+        view.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 300),
+            
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            authorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
-
-
+}
+// SearchViewController.swift
+extension SearchViewController {
+    func showBookDetails(_ book: BookModel) {
+        let detailVC = BookDetailViewController()
+        detailVC.book = book
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}

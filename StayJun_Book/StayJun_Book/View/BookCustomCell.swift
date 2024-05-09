@@ -77,9 +77,9 @@ class BookCustomCell: UICollectionViewCell {
 
     func configure(with book: BookModel) {
         titleLabel.text = book.title
-        authorLabel.text = "저자: \(book.author)"
+        authorLabel.text = "저자: \(book.authors)"
         priceLabel.text = "\(book.price)원"
-        loadImage(from: book.imageURL)
+//        loadImage(from: book.imageURL)
     }
     
     private func loadImage(from url: String) {

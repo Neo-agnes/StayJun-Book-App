@@ -60,13 +60,13 @@ class BookCollectionViewCell: UICollectionViewCell {
 
     func configure(with book: BookModel) {
         titleLabel.text = book.title
-        authorLabel.text = book.authors
-        loadImage(from: book.imageURL) // 이 부분은 아래에 구현
+//        authorLabel.text = book.authors
+//        loadImage(from: book.imageURL) // 이 부분은 아래에 구현
     }
 
     private func loadImage(from url: String) {
         guard let imageURL = URL(string: url) else { return }
-        // 여기서 비동기적으로 이미지를 로드하고 셀에 설정할 수 있습니다.
-        // URLSession 사용 또는 이미지 캐싱 라이브러리(예: SDWebImage) 사용 권장
+        // 여기서 비동기적으로 이미지를 로드하고 셀에 설정
+        // URLSession
     }
 }

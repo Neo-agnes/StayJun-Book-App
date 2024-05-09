@@ -80,9 +80,9 @@
 		547BF5112BE9E36F00795626 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
 				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
 				5457F2732BEB4EFC00358266 /* SearchBookView.swift */,
+				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
 				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
 				5457F2772BEB896000358266 /* BookCollectionViewCell.swift */,

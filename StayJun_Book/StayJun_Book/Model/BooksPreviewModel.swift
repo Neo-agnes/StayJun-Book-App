@@ -6,22 +6,22 @@
 //
 
 import Foundation
-
 // 책 정보를 나타내는 구조체 정의
-struct BookModel: Codable {
-    var title: String
-    var authors: String
-    var isbn: String
-    var publishYear: Int
-    var price: Double
-    var imageURL: String
-    
-    enum CodingKeys: String, CodingKey {
-        case title, author, isbn, price
-        case publishYear = "publish_year"
-        case imageURL = "image_url"
-    }
-}
+
+//struct BookModel: Codable {
+//    var title: String
+//    var authors: String
+//    var isbn: String
+//    var publishYear: Int
+//    var price: Double
+//    var imageURL: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case title, author, isbn, price
+//        case publishYear = "publish_year"
+//        case imageURL = "image_url"
+//    }
+//}
 
 // 전체 데이터를 나타내는 구조체 정의
 struct BookData: Codable {

@@ -5,7 +5,7 @@
 //  Created by Developer_P on 5/8/24.
 //
 
-// 책 모달 뷰
+// 책 상세 내역 모달 방식 적용
 import Foundation
 import UIKit
 import CoreData
@@ -31,8 +31,19 @@ class SearchBookView: UIViewController {
         if let book = book {
             bookNameLabel.text = book.title
             authorLabel.text = "저자: \(book.authors)"
-//            bookImageView.loadImage(from: book.imageURL)
             priceLabel.text = "\(book.price)원"
+
+            // 이미지 URL에서 이미지 로딩
+            if let imageUrl = URL(string: book.thumbnail) {
+                let task = URLSession.shared.dataTask(with: imageUrl) { [weak self] data, response, error in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            self?.bookImageView.image = UIImage(data: data)
+                        }
+                    }
+                }
+                task.resume()
+            }
         }
         
         cancelButton.setTitle("Cancel", for: .normal)
@@ -43,16 +54,33 @@ class SearchBookView: UIViewController {
     }
 
     private func setupLayout() {
-        let views = [bookNameLabel, authorLabel, bookImageView, priceLabel, cancelButton, saveButton]
-        views.forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
         NSLayoutConstraint.activate([
             bookNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             bookNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            // 이하 생략: 다른 컴포넌트들에 대한 오토레이아웃 설정
+            bookNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            bookNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            authorLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 10),
+            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            authorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            bookImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            bookImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bookImageView.widthAnchor.constraint(equalToConstant: 200),
+            bookImageView.heightAnchor.constraint(equalToConstant: 300),
+
+            priceLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 10),
+            priceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            cancelButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
+            cancelButton.widthAnchor.constraint(equalToConstant: 100),
+            cancelButton.heightAnchor.constraint(equalToConstant: 50),
+
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            saveButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
+            saveButton.widthAnchor.constraint(equalToConstant: 100),
+            saveButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
