@@ -92,9 +92,7 @@
 				54EA51712BED4D9500AB6700 /* BookTableViewCell.swift */,
 				5457F2732BEB4EFC00358266 /* SearchBookView.swift */,
 				5457F2772BEB896000358266 /* BookCollectionViewCell.swift */,
-				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				54EA516D2BEBF2DE00AB6700 /* Delegates.swift */,
-				54EA516F2BEC01B500AB6700 /* SomeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -136,7 +134,9 @@
 			isa = PBXGroup;
 			children = (
 				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
+				54EA516F2BEC01B500AB6700 /* SomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

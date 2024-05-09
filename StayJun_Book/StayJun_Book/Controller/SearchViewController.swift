@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
     let recentBooksLabel = UILabel().then {
         $0.text = "최근 본 책"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.isHidden = true
     }
     
     let resultsLabel = UILabel().then {
@@ -29,13 +30,16 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         $0.isHidden = true // Initially hide this label
     }
     
-    var tableView: UITableView!
+    var recentBooksTableView: UITableView!
+    var searchResultsTableView: UITableView!
+    var recentBooks: [BookModel] = []
     var searchResults: [BookModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupTableView()
+        setupRecentBooksTableView()
+        setupSearchResultsTableView()
         setupViews()
         setupConstraints()
         searchButton.addTarget(self, action: #selector(searchBooks), for: .touchUpInside)
@@ -53,7 +57,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         recentBooksLabel.translatesAutoresizingMaskIntoConstraints = false
         resultsLabel.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        recentBooksTableView.translatesAutoresizingMaskIntoConstraints = false
+        searchResultsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -67,75 +72,109 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
             resultsLabel.topAnchor.constraint(equalTo: recentBooksLabel.bottomAnchor, constant: 20),
             resultsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             resultsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            tableView.topAnchor.constraint(equalTo: resultsLabel.bottomAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            recentBooksTableView.topAnchor.constraint(equalTo: resultsLabel.bottomAnchor, constant: 20),
+            recentBooksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            recentBooksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            recentBooksTableView.heightAnchor.constraint(equalToConstant: 200), // Set the height as needed
+            searchResultsTableView.topAnchor.constraint(equalTo: resultsLabel.bottomAnchor, constant: 20),
+            searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchResultsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchResultsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
-    private func setupTableView() {
-           tableView = UITableView()
-           tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HeaderCell")
-           tableView.register(BookCustomCell.self, forCellReuseIdentifier: "BookCustomCell")
-           tableView.dataSource = self
-           tableView.delegate = self
-           view.addSubview(tableView)
-       }
-
+    private func setupRecentBooksTableView() {
+        recentBooksTableView = UITableView()
+        recentBooksTableView.register(BookCustomCell.self, forCellReuseIdentifier: "RecentBooksCell")
+        recentBooksTableView.dataSource = self
+        recentBooksTableView.delegate = self
+        view.addSubview(recentBooksTableView)
+        
+        // recentBooksLabel을 숨김으로 설정
+        recentBooksLabel.isHidden = true
+    }
+    
+    private func setupSearchResultsTableView() {
+        searchResultsTableView = UITableView()
+        searchResultsTableView.register(BookCustomCell.self, forCellReuseIdentifier: "BookCustomCell")
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.delegate = self
+        view.addSubview(searchResultsTableView)
+        
+        // resultsLabel을 숨김으로 설정
+        resultsLabel.isHidden = true
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1  // 검색 결과만 표시하기 때문에 섹션은 하나만 필요
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count  // 검색 결과의 수 만큼 행이 필요
+        if tableView == searchResultsTableView {
+            return searchResults.count
+        } else if tableView == recentBooksTableView {
+            return recentBooks.count
+        }
+        return 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 모든 셀을 BookCustomCell로 구성
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookCustomCell", for: indexPath) as! BookCustomCell
-        let book = searchResults[indexPath.row]
-        cell.configure(with: book)
-        return cell
+        if tableView == searchResultsTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BookCustomCell", for: indexPath) as! BookCustomCell
+            let book = searchResults[indexPath.row]
+            cell.configure(with: book)
+            return cell
+        } else if tableView == recentBooksTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecentBooksCell", for: indexPath) as! BookCustomCell
+            let book = recentBooks[indexPath.row]
+            cell.configure(with: book)
+            return cell
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let book = searchResults[indexPath.row]
-        let bookDetailView = SearchBookView()
-        bookDetailView.book = book  // 선택된 도서 데이터 전달
-        bookDetailView.modalPresentationStyle = .automatic  // 모달 전체 화면 설정
-        present(bookDetailView, animated: true, completion: nil)
+        if tableView == searchResultsTableView {
+            // 검색 결과 테이블 뷰를 선택한 경우
+            let book = searchResults[indexPath.row]
+            let bookDetailView = SearchBookView()
+            bookDetailView.book = book
+            bookDetailView.modalPresentationStyle = .automatic
+            present(bookDetailView, animated: true, completion: nil)
+        } else if tableView == recentBooksTableView {
+            // 최근 본 책 테이블 뷰를 선택한 경우
+            recentBooksLabel.isHidden = false
+        }
     }
     
     @objc func searchBooks() {
-            view.endEditing(true)
-            guard let keyword = searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !keyword.isEmpty else {
-                return  // Optionally, show an alert or a message to the user
-            }
-            resultsLabel.isHidden = false // Show results label when search is initiated
-            kakaoSearchBooks(keyword: keyword)
+        view.endEditing(true)
+        guard let keyword = searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !keyword.isEmpty else {
+            return  // Optionally, show an alert or a message to the user
         }
+        resultsLabel.isHidden = false // Show results label when search is initiated
+        kakaoSearchBooks(keyword: keyword)
+    }
     
     private func kakaoSearchBooks(keyword: String) {
         let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://dapi.kakao.com/v3/search/book?query=\(encodedKeyword)"
         guard let url = URL(string: urlString) else { return }
-
+        
         var request = URLRequest(url: url)
         request.addValue("KakaoAK 69470f49582e1c713f730c39c4ef3736", forHTTPHeaderField: "Authorization")
-
+        
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let data = data, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-
+            
             do {
                 let decoder = JSONDecoder()
                 let responseData = try decoder.decode(SearchResponse.self, from: data)
                 DispatchQueue.main.async {
                     self?.searchResults = responseData.documents
-                    self?.tableView.reloadData()
+                    self?.searchResultsTableView.reloadData() // 수정된 부분
                 }
             } catch {
                 print("Error decoding data: \(error.localizedDescription)")

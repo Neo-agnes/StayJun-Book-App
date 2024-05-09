@@ -150,6 +150,6 @@ class SearchBookView: UIViewController {
     }
     
     @objc private func saveButtonTapped() {
-        // 코어 데이터에 도서를 저장하는 로직을 여기에 구현
+        // 코어 데이터에 도서를 저장하는 로직을 여기에 구현해볼까...?
     }
 }
