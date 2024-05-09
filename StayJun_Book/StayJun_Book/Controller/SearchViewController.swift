@@ -12,20 +12,26 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         $0.borderStyle = .roundedRect
         $0.layer.borderColor = UIColor.black.cgColor
     }
-
+    
     let searchButton = UIButton().then {
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = .blue
     }
-
+    
     let recentBooksLabel = UILabel().then {
         $0.text = "최근 본 책"
         $0.font = UIFont.boldSystemFont(ofSize: 18)
     }
-
+    
+    let resultsLabel = UILabel().then {
+        $0.text = "검색 결과"
+        $0.font = UIFont.boldSystemFont(ofSize: 18)
+        $0.isHidden = true // Initially hide this label
+    }
+    
     var tableView: UITableView!
     var searchResults: [BookModel] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -34,19 +40,21 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
         setupConstraints()
         searchButton.addTarget(self, action: #selector(searchBooks), for: .touchUpInside)
     }
-
+    
     private func setupViews() {
         view.addSubview(searchTextField)
         view.addSubview(searchButton)
         view.addSubview(recentBooksLabel)
+        view.addSubview(resultsLabel) // Adding the results label to the view
     }
-
+    
     private func setupConstraints() {
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         recentBooksLabel.translatesAutoresizingMaskIntoConstraints = false
+        resultsLabel.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -56,74 +64,58 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
             recentBooksLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 20),
             recentBooksLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             recentBooksLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            tableView.topAnchor.constraint(equalTo: recentBooksLabel.bottomAnchor, constant: 20),
+            resultsLabel.topAnchor.constraint(equalTo: recentBooksLabel.bottomAnchor, constant: 20),
+            resultsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            resultsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: resultsLabel.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
-    private func setupTableView() {
-        tableView = UITableView()
-        // HeaderCell 식별자로 기본 UITableViewCell을 등록
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HeaderCell")
-        // BookCustomCell 식별자로 BookCustomCell 클래스를 등록
-        tableView.register(BookCustomCell.self, forCellReuseIdentifier: "BookCustomCell")
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        view.addSubview(tableView)
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-    }
-
     
+    private func setupTableView() {
+           tableView = UITableView()
+           tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HeaderCell")
+           tableView.register(BookCustomCell.self, forCellReuseIdentifier: "BookCustomCell")
+           tableView.dataSource = self
+           tableView.delegate = self
+           view.addSubview(tableView)
+       }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 + (searchResults.isEmpty ? 0 : 1)  // 항상 헤더를 위한 하나의 섹션, 결과가 있으면 추가 섹션
+        return 1  // 검색 결과만 표시하기 때문에 섹션은 하나만 필요
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            // 헤더를 위한 한 줄만
-            return 1
-        } else {
-            // 검색 결과에 해당하는 줄 수
-            return searchResults.count
-        }
+        return searchResults.count  // 검색 결과의 수 만큼 행이 필요
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            // 첫 번째 섹션의 셀 구성
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath)
-            cell.textLabel?.text = "검색 결과"
-            return cell
-        } else {
-            // 두 번째 섹션의 셀 구성
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BookCustomCell", for: indexPath) as! BookCustomCell
-            let book = searchResults[indexPath.row]
-            cell.configure(with: book)
-            return cell
-        }
+        // 모든 셀을 BookCustomCell로 구성
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BookCustomCell", for: indexPath) as! BookCustomCell
+        let book = searchResults[indexPath.row]
+        cell.configure(with: book)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {  // 헤더가 아닌 경우 확인
-            let book = searchResults[indexPath.row]
-            let bookDetailView = SearchBookView()
-            bookDetailView.book = book
-            present(bookDetailView, animated: true, completion: nil)
-        }
+        let book = searchResults[indexPath.row]
+        let bookDetailView = SearchBookView()
+        bookDetailView.book = book  // 선택된 도서 데이터 전달
+        bookDetailView.modalPresentationStyle = .automatic  // 모달 전체 화면 설정
+        present(bookDetailView, animated: true, completion: nil)
     }
     
     @objc func searchBooks() {
-        view.endEditing(true)
-        guard let keyword = searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !keyword.isEmpty else {
-            return  // Optionally, show an alert or a message to the user
+            view.endEditing(true)
+            guard let keyword = searchTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !keyword.isEmpty else {
+                return  // Optionally, show an alert or a message to the user
+            }
+            resultsLabel.isHidden = false // Show results label when search is initiated
+            kakaoSearchBooks(keyword: keyword)
         }
-        kakaoSearchBooks(keyword: keyword)
-    }
-
+    
     private func kakaoSearchBooks(keyword: String) {
         let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://dapi.kakao.com/v3/search/book?query=\(encodedKeyword)"
@@ -149,5 +141,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UITableViewDa
                 print("Error decoding data: \(error.localizedDescription)")
             }
         }.resume()
+    }
+}
+extension SearchViewController {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160  // 예를 들어, 각 셀의 높이를 160포인트로 설정
     }
 }

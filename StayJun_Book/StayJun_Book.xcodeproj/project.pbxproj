@@ -88,11 +88,9 @@
 		547BF5112BE9E36F00795626 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
 				54EA51712BED4D9500AB6700 /* BookTableViewCell.swift */,
 				5457F2732BEB4EFC00358266 /* SearchBookView.swift */,
-				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
-				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
 				5457F2772BEB896000358266 /* BookCollectionViewCell.swift */,
 				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				54EA516D2BEBF2DE00AB6700 /* Delegates.swift */,
@@ -120,6 +118,7 @@
 		5499EB4E2BE489E600F990A6 /* StayJun_Book */ = {
 			isa = PBXGroup;
 			children = (
+				54EA517B2BED6B8D00AB6700 /* Controller */,
 				547BF5112BE9E36F00795626 /* View */,
 				547BF50C2BE9AA0300795626 /* Network */,
 				547BF5082BE9A66800795626 /* Model */,
@@ -131,6 +130,15 @@
 				5499EB582BE489E600F990A6 /* StayJun_Book.xcdatamodeld */,
 			);
 			path = StayJun_Book;
+			sourceTree = "<group>";
+		};
+		54EA517B2BED6B8D00AB6700 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
