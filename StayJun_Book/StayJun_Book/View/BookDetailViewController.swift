@@ -61,10 +61,10 @@ class BookDetailViewController: UIViewController {
     }
 }
 // SearchViewController.swift
-extension SearchViewController {
-    func showBookDetails(_ book: BookModel) {
-        let detailVC = BookDetailViewController()
-        detailVC.book = book
-        navigationController?.pushViewController(detailVC, animated: true)
-    }
-}
+//extension SearchViewController {
+//    func showBookDetails(_ book: BookModel) {
+//        let detailVC = BookDetailViewController()
+//        detailVC.book = book
+//        navigationController?.pushViewController(detailVC, animated: tru                                e)
+//    }
+//}

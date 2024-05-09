@@ -10,7 +10,7 @@ struct BookModel: Codable {
     var title: String
     var authors: [String]
     var thumbnail: String
-    var price: String
+    var price: Int
 }
 
 struct SearchResponse: Codable {

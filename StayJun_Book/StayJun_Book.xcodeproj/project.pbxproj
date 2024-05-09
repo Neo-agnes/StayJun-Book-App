@@ -24,6 +24,10 @@
 		54EA516C2BEB938300AB6700 /* books.json in Resources */ = {isa = PBXBuildFile; fileRef = 54EA516B2BEB938300AB6700 /* books.json */; };
 		54EA516E2BEBF2DE00AB6700 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EA516D2BEBF2DE00AB6700 /* Delegates.swift */; };
 		54EA51702BEC01B500AB6700 /* SomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EA516F2BEC01B500AB6700 /* SomeViewController.swift */; };
+		54EA51722BED4D9500AB6700 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EA51712BED4D9500AB6700 /* BookTableViewCell.swift */; };
+		54EA51752BED531200AB6700 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 54EA51742BED531200AB6700 /* Then */; };
+		54EA51782BED537A00AB6700 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54EA51772BED537A00AB6700 /* SnapKit */; };
+		54EA517A2BED537A00AB6700 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 54EA51792BED537A00AB6700 /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,7 @@
 		54EA516B2BEB938300AB6700 /* books.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = books.json; sourceTree = "<group>"; };
 		54EA516D2BEBF2DE00AB6700 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
 		54EA516F2BEC01B500AB6700 /* SomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeViewController.swift; sourceTree = "<group>"; };
+		54EA51712BED4D9500AB6700 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EA51752BED531200AB6700 /* Then in Frameworks */,
+				54EA51782BED537A00AB6700 /* SnapKit in Frameworks */,
+				54EA517A2BED537A00AB6700 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,11 +89,12 @@
 			isa = PBXGroup;
 			children = (
 				54422BD82BE4FA7500CE69DA /* SearchViewController.swift */,
+				54EA51712BED4D9500AB6700 /* BookTableViewCell.swift */,
 				5457F2732BEB4EFC00358266 /* SearchBookView.swift */,
 				547BF50F2BE9B1A000795626 /* BookCustomCell.swift */,
-				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
 				5457F2772BEB896000358266 /* BookCollectionViewCell.swift */,
+				54422BDA2BE4FA9200CE69DA /* SavedBooksViewController.swift */,
 				54EA516D2BEBF2DE00AB6700 /* Delegates.swift */,
 				54EA516F2BEC01B500AB6700 /* SomeViewController.swift */,
 			);
@@ -140,6 +149,11 @@
 			dependencies = (
 			);
 			name = StayJun_Book;
+			packageProductDependencies = (
+				54EA51742BED531200AB6700 /* Then */,
+				54EA51772BED537A00AB6700 /* SnapKit */,
+				54EA51792BED537A00AB6700 /* SnapKit-Dynamic */,
+			);
 			productName = StayJun_Book;
 			productReference = 5499EB4C2BE489E600F990A6 /* StayJun_Book.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +182,10 @@
 				Base,
 			);
 			mainGroup = 5499EB432BE489E600F990A6;
+			packageReferences = (
+				54EA51732BED531200AB6700 /* XCRemoteSwiftPackageReference "Then" */,
+				54EA51762BED537A00AB6700 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 5499EB4D2BE489E600F990A6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -208,6 +226,7 @@
 				5457F2782BEB896000358266 /* BookCollectionViewCell.swift in Sources */,
 				54EA516E2BEBF2DE00AB6700 /* Delegates.swift in Sources */,
 				5457F2762BEB546A00358266 /* BooksPreviewModel.swift in Sources */,
+				54EA51722BED4D9500AB6700 /* BookTableViewCell.swift in Sources */,
 				547BF50E2BE9AA4900795626 /* BookAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +438,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54EA51732BED531200AB6700 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		54EA51762BED537A00AB6700 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54EA51742BED531200AB6700 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EA51732BED531200AB6700 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		54EA51772BED537A00AB6700 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EA51762BED537A00AB6700 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		54EA51792BED537A00AB6700 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EA51762BED537A00AB6700 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5499EB582BE489E600F990A6 /* StayJun_Book.xcdatamodeld */ = {

@@ -1,95 +1,84 @@
-//
 //  SearchBookView.swift
-//  StayJun_Book
-//
-//  Created by Developer_P on 5/8/24.
-//
 
-// 책 상세 내역 모달 방식 적용
+// 책 상세 내역 모달 방식 적용하는 곳
 import Foundation
 import UIKit
 import CoreData
+import Then
 
 class SearchBookView: UIViewController {
     var book: BookModel?  // 책 데이터를 받을 변수
-    
-    let bookNameLabel = UILabel()
-    let authorLabel = UILabel()
-    let bookImageView = UIImageView()
-    let priceLabel = UILabel()
-    let cancelButton = UIButton()
-    let saveButton = UIButton()
+
+    let bookNameLabel = UILabel().then {
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.font = UIFont.boldSystemFont(ofSize: 20)
+    }
+
+    let authorLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.textColor = .darkGray
+    }
+
+    let bookImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+    }
+
+    let priceLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.textColor = .blue
+    }
+
+    let cancelButton = UIButton().then {
+        $0.setTitle("Cancel", for: .normal)
+        $0.backgroundColor = .red
+        $0.layer.cornerRadius = 10
+    }
+
+    let saveButton = UIButton().then {
+        $0.setTitle("Save", for: .normal)
+        $0.backgroundColor = .green
+        $0.layer.cornerRadius = 10
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupUI()
-        setupLayout()
+        addSubviews()
+        setupConstraints()
+        loadDataIfNeeded()
     }
 
-    private func setupUI() {
-        if let book = book {
-            bookNameLabel.text = book.title
-            authorLabel.text = "저자: \(book.authors)"
-            priceLabel.text = "\(book.price)원"
+    private func addSubviews() {
+        view.addSubview(bookNameLabel)
+        view.addSubview(authorLabel)
+        view.addSubview(bookImageView)
+        view.addSubview(priceLabel)
+        view.addSubview(cancelButton)
+        view.addSubview(saveButton)
+    }
 
-            // 이미지 URL에서 이미지 로딩
-            if let imageUrl = URL(string: book.thumbnail) {
-                let task = URLSession.shared.dataTask(with: imageUrl) { [weak self] data, response, error in
-                    if let data = data {
-                        DispatchQueue.main.async {
-                            self?.bookImageView.image = UIImage(data: data)
-                        }
-                    }
+    private func loadDataIfNeeded() {
+        guard let book = book else { return }
+        bookNameLabel.text = book.title
+        authorLabel.text = "저자: \(book.authors)"
+        priceLabel.text = "가격: \(book.price)원"
+        loadBookImage(from: book.thumbnail)
+    }
+
+    private func loadBookImage(from url: String) {
+        guard let imageUrl = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: imageUrl) { [weak self] data, _, _ in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self?.bookImageView.image = image
                 }
-                task.resume()
             }
-        }
-        
-        cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
-        
-        saveButton.setTitle("Save", for: .normal)
-        saveButton.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+        }.resume()
     }
 
-    private func setupLayout() {
-        NSLayoutConstraint.activate([
-            bookNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            bookNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bookNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            bookNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-
-            authorLabel.topAnchor.constraint(equalTo: bookNameLabel.bottomAnchor, constant: 10),
-            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            authorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-
-            bookImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            bookImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bookImageView.widthAnchor.constraint(equalToConstant: 200),
-            bookImageView.heightAnchor.constraint(equalToConstant: 300),
-
-            priceLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 10),
-            priceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            cancelButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
-            cancelButton.widthAnchor.constraint(equalToConstant: 100),
-            cancelButton.heightAnchor.constraint(equalToConstant: 50),
-
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
-            saveButton.widthAnchor.constraint(equalToConstant: 100),
-            saveButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-    
-    @objc func cancelAction() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    @objc func saveAction() {
-        NotificationCenter.default.post(name: NSNotification.Name("BookSaved"), object: nil, userInfo: ["book": book])
-        dismiss(animated: true, completion: nil)
+    private func setupConstraints() {
+        // Your NSLayoutConstraint.activate([...]) calls here
     }
 }

@@ -1,14 +1,11 @@
-//
 //  BookCustomCell.swift
-//  StayJun_Book
-//
-//  Created by Developer_P on 5/7/24.
-//
 
 import Foundation
 import UIKit
+import CoreData
+import Then
 
-class BookCustomCell: UICollectionViewCell {
+class BookCustomCell: UITableViewCell {
     let bookImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -37,8 +34,8 @@ class BookCustomCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
     
