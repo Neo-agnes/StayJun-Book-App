@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class BookCollectionViewCell: UICollectionViewCell {
-    // UI 컴포넌트 정의
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
     private let coverImageView = UIImageView()
@@ -23,8 +22,14 @@ class BookCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        coverImageView.image = nil  // 이미지 재사용 문제 방지
+        titleLabel.text = nil
+        authorLabel.text = nil
+    }
+
     private func setupViews() {
-        // 뷰 구성, 레이아웃 설정
         coverImageView.contentMode = .scaleAspectFit
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         authorLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -32,8 +37,7 @@ class BookCollectionViewCell: UICollectionViewCell {
         addSubview(coverImageView)
         addSubview(titleLabel)
         addSubview(authorLabel)
-        
-        // 오토레이아웃 설정
+
         coverImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -54,20 +58,15 @@ class BookCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func configure(with book: Book) {
+    func configure(with book: BookModel) {
         titleLabel.text = book.title
-        authorLabel.text = book.author  // 'author'를 사용
-//        coverImageView.image = UIImage(named: book.coverImage)
+        authorLabel.text = book.authors
+        loadImage(from: book.imageURL) // 이 부분은 아래에 구현
+    }
+
+    private func loadImage(from url: String) {
+        guard let imageURL = URL(string: url) else { return }
+        // 여기서 비동기적으로 이미지를 로드하고 셀에 설정할 수 있습니다.
+        // URLSession 사용 또는 이미지 캐싱 라이브러리(예: SDWebImage) 사용 권장
     }
 }
-//class Book {
-//    var title: String
-//    var coverImage: String
-//    var author: String  // 'author' 속성 추가
-//
-//    init(title: String, coverImage: String, author: String) {
-//        self.title = title
-//        self.coverImage = coverImage
-//        self.author = author  // 초기화
-//    }
-//}

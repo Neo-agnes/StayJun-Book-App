@@ -23,6 +23,7 @@
 		5499EB5F2BE489E800F990A6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5499EB5E2BE489E800F990A6 /* Base */; };
 		54EA516C2BEB938300AB6700 /* books.json in Resources */ = {isa = PBXBuildFile; fileRef = 54EA516B2BEB938300AB6700 /* books.json */; };
 		54EA516E2BEBF2DE00AB6700 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EA516D2BEBF2DE00AB6700 /* Delegates.swift */; };
+		54EA51702BEC01B500AB6700 /* SomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EA516F2BEC01B500AB6700 /* SomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		5499EB602BE489E800F990A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54EA516B2BEB938300AB6700 /* books.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = books.json; sourceTree = "<group>"; };
 		54EA516D2BEBF2DE00AB6700 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
+		54EA516F2BEC01B500AB6700 /* SomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				547BF5122BEA351600795626 /* BookDetailViewController.swift */,
 				5457F2772BEB896000358266 /* BookCollectionViewCell.swift */,
 				54EA516D2BEBF2DE00AB6700 /* Delegates.swift */,
+				54EA516F2BEC01B500AB6700 /* SomeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				547BF50B2BE9A6EE00795626 /* MyCoreDataController.swift in Sources */,
 				547BF5132BEA351600795626 /* BookDetailViewController.swift in Sources */,
 				5499EB502BE489E600F990A6 /* AppDelegate.swift in Sources */,
+				54EA51702BEC01B500AB6700 /* SomeViewController.swift in Sources */,
 				5499EB522BE489E600F990A6 /* SceneDelegate.swift in Sources */,
 				5457F2782BEB896000358266 /* BookCollectionViewCell.swift in Sources */,
 				54EA516E2BEBF2DE00AB6700 /* Delegates.swift in Sources */,

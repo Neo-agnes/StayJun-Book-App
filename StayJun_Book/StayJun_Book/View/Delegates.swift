@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol SearchBookViewDelegate: AnyObject {
     func presentAlert(from view: SearchBookView, withMessage message: String)
